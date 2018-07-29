@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">BookStoreApp</string>
+
+    // Editor Book Details
+
+    <string name="editor_activity_title_new_book">New Book</string>
+    <string name="editor_acitvity_title_edit_book">Edit Book</string>
+
+    <string name="error_insert_book">Error with saving book</string>
+    <string name="ok_insert_book">Book saved with row ID:</string>
+
+    <string name="error_update_book">Error with updating book</string>
+    <string name="ok_update_book">Book updated successful</string>
+
+    <string name="category_book_details">Book Details</string>
+    <string name="hint_book_name">Book Name</string>
+    <string name="hint_book_author_name">Author Name</string>
+    <string name="hint_book_price">Book Price</string>
+    <string name="unit_book_price">€</string>
+    <string name="hint_book_quantity">Book Quantity</string>
+    <string name="hint_supplier_name">Supplier Name</string>
+    <string name="hint_supplier_phone_number">Supplier Phone Number</string>
+
+    // Editor Menu
+
+    <string name="action_save">Save Entries</string>
+    <string name="action_delete">Delete</string>
+
+    // Catalog Book Details
+
+    <string name="book_start">The books table contains</string>
+    <string name="book_end">pets.\n\n</string>
+
+    <string name="empty_view_title_text">It\'s a bit empty here...</string>
+    <string name="empty_view_subtitle_text">Get started by adding a book</string>
+
+
+
+    <string name="unsaved_changes_alert_message"> Attention, you have made unsaved changes!</string>
+    <string name="quit_editing">Quit Editing</string>
+    <string name="keep_editing">Keep Editing</string>
+
+    <string name="delete_book_alert_message">Attention, you are about to delete a book!</string>
+    <string name="stop_delete_book">Cancel</string>
+    <string name="continue_delete_book">Delete</string>
+
+    <string name="error_delete_book">Error with deleting Book</string>
+    <string name="ok_delete_book">Book deleted successfully</string>
+
+    <string name="currency_icon">$</string>
+
+    <string name="sell_button">Sell</string>
+
+    <string name="contact_supplier_button">Contact Supplier</string>
+</resources>

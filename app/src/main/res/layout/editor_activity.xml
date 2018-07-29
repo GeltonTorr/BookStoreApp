@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_margin"
+
+    tools:context=".EditorActivity">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/category_book_details"/>
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/edit_book_name"
+        android:hint="@string/hint_book_name"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/edit_book_author_name"
+        android:hint="@string/hint_book_author_name"
+        android:inputType="textCapWords"
+        style="@style/EditorFieldStyle"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/activity_padding"
+        android:paddingRight="@dimen/activity_padding">
+
+        <EditText
+            android:id="@+id/edit_book_price"
+            style="@style/EditorFieldStyle"
+            android:digits="01234567890."
+            android:layout_weight="1"
+            android:hint="@string/hint_book_price"
+            android:inputType="numberDecimal"/>
+
+        <TextView
+            android:id="@+id/label_price_units"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="@string/unit_book_price"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edit_book_quantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_book_quantity"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/edit_book_supplier_name"
+        android:hint="@string/hint_supplier_name"
+        android:inputType="textCapWords"
+        style="@style/EditorFieldStyle"/>
+
+    <EditText
+        android:id="@+id/edit_book_supplier_phone_number"
+        android:hint="@string/hint_supplier_phone_number"
+        android:inputType="phone"
+        style="@style/EditorFieldStyle"/>
+
+    <Button
+        android:id="@+id/contact_supplier_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="visible"
+        android:text="@string/contact_supplier_button"/>
+</LinearLayout>
