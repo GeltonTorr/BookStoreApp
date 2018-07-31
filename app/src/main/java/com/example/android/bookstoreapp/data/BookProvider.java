@@ -13,10 +13,7 @@ import com.example.android.bookstoreapp.data.BookContract.BookEntry;
 
 public class BookProvider extends ContentProvider {
 
-    private BookDbHelper mDbHelper;
-
     private static final String LOG_TAG = BookProvider.class.getSimpleName();
-
     private static final int BOOKS = 100;
     private static final int BOOKS_ID = 101;
     private static final UriMatcher mUrimatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -25,6 +22,8 @@ public class BookProvider extends ContentProvider {
         mUrimatcher.addURI(BookContract.CONTENT_AUTHORITY, BookContract.PATH_BOOKS, BOOKS);
         mUrimatcher.addURI(BookContract.CONTENT_AUTHORITY, BookContract.PATH_BOOKS + "/#", BOOKS_ID);
     }
+
+    private BookDbHelper mDbHelper;
 
     @Override
     public boolean onCreate() {
@@ -48,15 +47,15 @@ public class BookProvider extends ContentProvider {
 
             case BOOKS_ID:
                 selection = BookEntry._ID + "=?";
-                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 cursor = database.query(BookEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
 
             default:
                 throw new IllegalArgumentException("Can not query unknown URI:" + uri);
         }
-    cursor.setNotificationUri(getContext().getContentResolver(), uri);
-    return cursor;
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
+        return cursor;
     }
 
     @Override
@@ -112,11 +111,11 @@ public class BookProvider extends ContentProvider {
 
         long id = database.insert(BookEntry.TABLE_NAME, null, values);
 
-            if (id == -1) {
-                Log.e(LOG_TAG, "Failed to insert row for" + uri);
-                return null;
-            }
-        getContext().getContentResolver().notifyChange(uri,null);
+        if (id == -1) {
+            Log.e(LOG_TAG, "Failed to insert row for" + uri);
+            return null;
+        }
+        getContext().getContentResolver().notifyChange(uri, null);
         return ContentUris.withAppendedId(uri, id);
     }
 
@@ -130,26 +129,26 @@ public class BookProvider extends ContentProvider {
         final int match = mUrimatcher.match(uri);
         switch (match) {
             case BOOKS:
-                bookRowsDeleted = database.delete(BookEntry.TABLE_NAME,selection, selectionArgs);
+                bookRowsDeleted = database.delete(BookEntry.TABLE_NAME, selection, selectionArgs);
                 break;
 
             case BOOKS_ID:
                 selection = BookEntry._ID + "=?";
-                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 bookRowsDeleted = database.delete(BookEntry.TABLE_NAME, selection, selectionArgs);
                 break;
 
             default:
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);
         }
-        if (bookRowsDeleted != 0){
-            getContext().getContentResolver().notifyChange(uri,null);
+        if (bookRowsDeleted != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
         }
         return bookRowsDeleted;
     }
 
     @Override
-    public int update(Uri uri, ContentValues values, String selection, String [] selectionArgs) {
+    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         final int match = mUrimatcher.match(uri);
         switch (match) {
             case BOOKS:
@@ -157,7 +156,7 @@ public class BookProvider extends ContentProvider {
 
             case BOOKS_ID:
                 selection = BookEntry._ID + "=?";
-                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updateBook(uri, values, selection, selectionArgs);
 
             default:
@@ -171,34 +170,41 @@ public class BookProvider extends ContentProvider {
             return 0;
         }
 
-        String name = values.getAsString(BookEntry.COLUMN_BOOK_NAME);
-        if (name == null) {
-            throw new IllegalArgumentException("Book needs a name");
-        }
+        if (values.size() == 1){
 
-        String price = values.getAsString(BookEntry.COLUMN_BOOK_PRICE);
-        if (price == null) {
-            throw new IllegalArgumentException("Book needs a name");
-        }
-
-        Integer quantity = values.getAsInteger(BookEntry.COLUMN_BOOK_QUANTITY);
-        if (quantity == null && quantity < 1) {
-            throw new IllegalArgumentException("Book needs a valid quantity");
-        }
-
-        String supplier = values.getAsString(BookEntry.COLUMN_BOOK_SUPPLIER_NAME);
-        if (supplier == null) {
-            throw new IllegalArgumentException("Book needs supplier information");
-        }
-
-        SQLiteDatabase database = mDbHelper.getWritableDatabase();
-
-        int bookRowsUpdated = database.update(BookEntry.TABLE_NAME, values, selection, selectionArgs);
-            if (bookRowsUpdated != 0){
-                getContext().getContentResolver().notifyChange(uri,null);
+            Integer quantity = values.getAsInteger(BookEntry.COLUMN_BOOK_QUANTITY);
+            if (quantity == null && quantity < 1) {
+                throw new IllegalArgumentException("Book needs a valid quantity");
             }
-    return bookRowsUpdated;
-    }
+
+        } else if (values.size() > 1){
+
+            String name = values.getAsString(BookEntry.COLUMN_BOOK_NAME);
+            if (name == null) {
+                throw new IllegalArgumentException("Book needs a name");
+            }
+
+            String price = values.getAsString(BookEntry.COLUMN_BOOK_PRICE);
+            if (price == null) {
+                throw new IllegalArgumentException("Book needs a name");
+            }
+
+            Integer quantity = values.getAsInteger(BookEntry.COLUMN_BOOK_QUANTITY);
+            if (quantity == null && quantity < 1) {
+                throw new IllegalArgumentException("Book needs a valid quantity");
+            }
+
+            String supplier = values.getAsString(BookEntry.COLUMN_BOOK_SUPPLIER_NAME);
+            if (supplier == null) {
+                throw new IllegalArgumentException("Book needs supplier information");
+            }
+        }
+            SQLiteDatabase database = mDbHelper.getWritableDatabase();
+
+            int bookRowsUpdated = database.update(BookEntry.TABLE_NAME, values, selection, selectionArgs);
+            if (bookRowsUpdated != 0) {
+                getContext().getContentResolver().notifyChange(uri, null);
+            }
+            return bookRowsUpdated;
+        }
 }
-
-

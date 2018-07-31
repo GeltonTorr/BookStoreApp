@@ -1,6 +1,5 @@
 package com.example.android.bookstoreapp;
 
-import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentUris;
 import android.content.CursorLoader;
@@ -14,10 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import com.example.android.bookstoreapp.data.BookContract.BookEntry;
 import com.example.android.bookstoreapp.data.BookCursorAdapter;
 
-public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int BOOK_LOADER = 0;
     BookCursorAdapter mCursorAdapter;
@@ -77,21 +77,16 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
-                Uri currentBookUri = ContentUris.withAppendedId(BookEntry.CONTENT_URI,id);
+                Uri currentBookUri = ContentUris.withAppendedId(BookEntry.CONTENT_URI, id);
                 intent.setData(currentBookUri);
                 startActivity(intent);
             }
         });
-        getLoaderManager().initLoader(BOOK_LOADER,null,this);
+        getLoaderManager().initLoader(BOOK_LOADER, null, this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-    }
-
-public void onButtonClick(View view) {
-
-
     }
 }

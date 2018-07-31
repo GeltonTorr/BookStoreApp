@@ -1,6 +1,6 @@
 <resources>
 
-    //Base application theme
+    <!-- Base application theme -->
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -8,7 +8,7 @@
         <item name="colorAccent">#00BFFF</item>
     </style>
 
-    // Theme of the editor
+    <!-- Theme of the editor -->
 
     <style name="EditorTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">#1E90FF</item>
@@ -16,7 +16,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    // Style for a category in the editor
+    <!-- Style for a category in the editor -->
 
     <style name="CategoryStyle">
         <item name="android:layout_height">wrap_content</item>
@@ -27,24 +27,13 @@
         <item name="android:textAppearance">?android:textAppearanceSmall</item>
     </style>
 
-    //Style for an EditText field in the editor
+    <!-- Style for an EditText field in the editor -->
 
     <style name="EditorFieldStyle">
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:textAppearance">?android:textAppearanceMedium</item>
-    </style>
-
-    // Style for the measurement units for an EditText field in the editor
-
-    <style name="EditorUnitsStyle">
-        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_alignParentRight">true</item>
-        <item name="android:paddingRight">16dp</item>
-        <item name="android:paddingTop">4dp</item>
-        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        <item name="android:textAlignment">center</item>
     </style>
-
-
 </resources>
